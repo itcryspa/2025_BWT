@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pillows Shop — Магазин подушек</title>
+    <style>
+      .container {
+        max-width: 900px;
+        margin: 0;
+        padding: 20px 20px;
+      }
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        margin: 0;
+        line-height: 1.4;
+        color: #222;
+        background: #f7f7f7;
+      }
+      header.site-header {
+        background: linear-gradient(90deg, #fff, #f0f8ff);
+        padding: 18px 24px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 30px;
+      }
+      .site-title {
+        font-size: 3rem;
+        margin: 0;
+        color: #0b3954;
+      }
+
+      .site-subtitle {
+        font-size: 1;
+        color: #4b6b7a;
+        margin: 1;
+      }
+      .site-brand {
+        margin-top: 30px;
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        line-height: 0.5;
+      }
+      .images {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .figure {
+        text-align: center;
+        margin: 0;
+      }
+      .images img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #0b3954;
+        transition: transform 0.3s, border-color 0.3s;
+      }
+      .figcaption {
+        font-size: 0.9rem;
+        color: #333;
+        margin-top: 6px;
+      }
+      .btn {
+        font-size: 0.9rem;
+        color: #333;
+        margin-top: 6px;
+      }
+      .to-top {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: #0b3954;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+      }
+      .main-nav {
+        background: #0b3954;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .main-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: inline-flex;
+        gap: 40px;
+      }
+
+      .main-nav a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .main-nav a:hover {
+        background: #145a8d;
+      }
+
+      .main-nav a.active {
+        background: #ffffff;
+        color: #0b3954;
+        cursor: default;
+      }
+      h2 {
+        color: #0b3954;
+        margin-bottom: 20px;
+        margin: 40px auto;
+        text-align: center;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin: 0 auto;
+        background: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        width: 700px;
+      }
+
+      td,
+      th {
+        border: 1px solid #ddd;
+        padding: 10px;
+      }
+
+      th {
+        background: #eaeaea;
+      }
+
+      img {
+        width: 500px;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      button {
+        margin-top: 20px;
+        background: #0b3954;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .center-image {
+        display: block;
+        margin: 20px auto;
+        width: 1000px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="order.html">Сделать заказ</a></li>
+          <li><a href="passport.html" class="active">Паспорт</a></li>
+        </ul>
+      </nav>
+    </header>
+    <a id="top"></a>
+    <div class="site-brand">
+      <h1 class="site-title">Pillows Shop</h1>
+      <p class="site-subtitle">Красивые и удобные подушки для дома</p>
+    </div>
+
+    <table id="passportTable">
+      <tr>
+        <th colspan="2">Паспортные данные</th>
+      </tr>
+      <tr>
+        <td rowspan="5"><img src="passport.png" alt="Фото паспорта" /></td>
+        <td><b>Фамилия:</b> <span id="lastname">Дозорцева</span></td>
+      </tr>
+      <tr>
+        <td><b>Имя:</b> <span id="firstname">Лада</span></td>
+      </tr>
+      <tr>
+        <td><b>Отчество:</b> <span id="middlename">Александровна</span></td>
+      </tr>
+      <tr>
+        <td><b>Пол:</b> <span id="gender">Ж</span></td>
+      </tr>
+      <tr>
+        <td><b>Год рождения:</b> <span id="birthyear">2005</span></td>
+      </tr>
+    </table>
+
+    <button id="toggleBtn">Перевести на латиницу</button>
+
+    <script>
+      const toggleBtn = document.getElementById("toggleBtn");
+      let isCyrillic = true;
+
+      const data = {
+        lastname: { ru: "Дозорцева", en: "Dozortseva" },
+        firstname: { ru: "Лада", en: "Lada" },
+        middlename: { ru: "Александровна", en: "Aleksandrovna" },
+        gender: { ru: "Ж", en: "F" },
+        birthyear: { ru: "2005", en: "2005" },
+      };
+
+      toggleBtn.addEventListener("click", () => {
+        isCyrillic = !isCyrillic;
+
+        for (let key in data) {
+          document.getElementById(key).textContent = isCyrillic
+            ? data[key].ru
+            : data[key].en;
+        }
+
+        toggleBtn.textContent = isCyrillic
+          ? "Перевести на латиницу"
+          : "Перевести на кириллицу";
+      });
+    </script>
+    <img src="screenshot.png" alt="скрин" class="center-image" />
+    <a href="#top" class="to-top">Наверх </a>
+  </body>
+</html>

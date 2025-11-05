@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pillows Shop — Магазин подушек</title>
+    <style>
+      .container {
+        max-width: 900px;
+        margin: 0;
+        padding: 20px 20px;
+      }
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        margin: 0;
+        line-height: 1.4;
+        color: #222;
+        background: #f7f7f7;
+      }
+      header.site-header {
+        background: linear-gradient(90deg, #fff, #f0f8ff);
+        padding: 18px 24px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 30px;
+      }
+      .site-title {
+        font-size: 3rem;
+        margin: 0;
+        color: #0b3954;
+      }
+
+      .site-subtitle {
+        font-size: 1;
+        color: #4b6b7a;
+        margin: 1;
+      }
+      .site-brand {
+        margin-top: 30px;
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        line-height: 0.5;
+      }
+      .images {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .figure {
+        text-align: center;
+        margin: 0;
+      }
+      .images img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #0b3954;
+        transition: transform 0.3s, border-color 0.3s;
+      }
+      .figcaption {
+        font-size: 0.9rem;
+        color: #333;
+        margin-top: 6px;
+      }
+      .btn {
+        font-size: 0.9rem;
+        color: #333;
+        margin-top: 6px;
+      }
+      .to-top {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: #0b3954;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+      }
+      .main-nav {
+        background: #0b3954;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .main-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: inline-flex;
+        gap: 40px;
+      }
+
+      .main-nav a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .main-nav a:hover {
+        background: #145a8d;
+      }
+
+      .main-nav a.active {
+        background: #ffffff;
+        color: #0b3954;
+        cursor: default;
+      }
+      .algorithm {
+        background: #f2faff;
+        border: 1px solid #cde;
+        padding: 20px;
+        border-radius: 10px;
+        width: 350px;
+        margin-top: 30px;
+        margin: 40px auto;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .algorithm h2 {
+        color: #0b3954;
+        text-align: center;
+      }
+
+      .algorithm label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .algorithm input {
+        width: 100%;
+        padding: 6px;
+        margin-top: 4px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .algorithm button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 8px;
+        background-color: #0b3954;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .algorithm button:hover {
+        background-color: #145a8d;
+      }
+
+      #result {
+        margin-top: 15px;
+        text-align: center;
+        font-weight: bold;
+      }
+      .contact-form {
+        background: #eef7ff;
+        padding: 25px;
+        border-radius: 10px;
+        width: 420px;
+        margin-top: 40px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        margin: 40px auto;
+        text-align: center;
+      }
+
+      .contact-form h2 {
+        color: #0b3954;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .contact-form label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .contact-form input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .contact-form button {
+        margin-top: 20px;
+        width: 100%;
+        background: #0b3954;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s;
+      }
+
+      .contact-form button:hover {
+        background: #145a8d;
+      }
+      .pillow-table {
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      .pillow-table h2 {
+        color: #0b3954;
+        margin-bottom: 15px;
+      }
+
+      .pillow-table table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background-image: url("back_table.png");
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        overflow: hidden;
+        background-image: url("back_table.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .pillow-table th {
+        background-color: rgba(11, 57, 84, 00);
+        color: rgb(20, 18, 63);
+        padding: 10px;
+        font-size: 1.1rem;
+      }
+
+      .pillow-table td {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 12px;
+        text-align: center;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+      }
+
+      .pillow-table img {
+        width: 100px; /* миниатюра */
+        height: 100px;
+        object-fit: cover;
+        border-radius: 10%;
+        border: 2px solid #0b3954;
+        transition: transform 0.3s;
+      }
+      .shop-form {
+        background: #f0faff;
+        padding: 25px;
+        border-radius: 10px;
+        width: 450px;
+        margin: 40px auto;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .shop-form h2 {
+        text-align: center;
+        color: #0b3954;
+        margin-bottom: 15px;
+      }
+
+      .shop-form label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .shop-form input[type="text"],
+      .shop-form input[type="number"],
+      .shop-form input[type="date"],
+      .shop-form input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .shop-form button {
+        margin-top: 20px;
+        width: 100%;
+        background: #0b3954;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s;
+      }
+
+      .shop-form button:hover {
+        background: #145a8d;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="order.html" class="active">Сделать заказ</a></li>
+          <li><a href="passport.html">Паспорт</a></li>
+        </ul>
+      </nav>
+    </header>
+    <a id="top"></a>
+    <div class="site-brand">
+      <h1 class="site-title">Pillows Shop</h1>
+      <p class="site-subtitle">Красивые и удобные подушки для дома</p>
+    </div>
+
+    <section class="algorithm">
+      <h2>Решение алгоритмической задачи</h2>
+      <p>Вычислить значение функции: <b>Z = 1 / (X × Y)</b></p>
+
+      <label for="x">Введите X:</label>
+      <input type="number" id="x" step="any" placeholder="Введите число X" />
+
+      <label for="y">Введите Y:</label>
+      <input type="number" id="y" step="any" placeholder="Введите число Y" />
+
+      <button id="calcBtn">Вычислить Z</button>
+
+      <p id="result"></p>
+    </section>
+
+    <script>
+      document.getElementById("calcBtn").addEventListener("click", function () {
+        const x = parseFloat(document.getElementById("x").value);
+        const y = parseFloat(document.getElementById("y").value);
+
+        const z = 1 / (x * y);
+        document.getElementById(
+          "result"
+        ).textContent = `Результат: Z = ${z.toFixed(5)}`;
+      });
+    </script>
+
+    <section class="contact-form">
+      <h2>Отправить контактные данные</h2>
+      <form
+        action="https://www.google.ru/"
+        method="get"
+        target="_blank"
+        novalidate
+      >
+        <label for="surname">Фамилия:</label>
+        <input
+          type="text"
+          id="surname"
+          name="surname"
+          placeholder="Введите фамилию"
+          required
+        />
+
+        <label for="name">Имя:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Введите имя"
+          required
+        />
+
+        <label for="group">Группа:</label>
+        <input
+          type="text"
+          id="group"
+          name="group"
+          placeholder="Б24ДЗ27"
+          required
+        />
+
+        <label for="phone">Мобильный телефон:</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="+7-999-999-99-99"
+          required
+        />
+
+        <label for="email">Электронная почта:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="example@mail.ru"
+          required
+        />
+
+        <label for="date">Дата отправки сообщения:</label>
+        <input type="date" id="date" name="date" required />
+
+        <input type="hidden" name="source" value="GitHub_Form_Contact" />
+
+        <button type="submit">Отправить</button>
+      </form>
+    </section>
+
+    <section class="pillow-table">
+      <h2>Пример подушки</h2>
+      <table>
+        <tr>
+          <th>Характеристика</th>
+          <th>Пример</th>
+          <th>Изображение</th>
+        </tr>
+        <tr>
+          <td>Форма</td>
+          <td>Квадратная</td>
+          <td>
+            <a href="blue_pillow.png" target="_blank">
+              <img src="blue_pillow.png" alt="Квадратная подушка" />
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>Материал</td>
+          <td>Хлопок</td>
+          <td>
+            <a href="cotton_material.jpg" target="_blank">
+              <img src="cotton_material.jpg" alt="Хлопковая подушка" />
+            </a>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="shop-form">
+      <h2>Сделать заказ</h2>
+
+      <form
+        action="https://www.google.ru/"
+        method="get"
+        target="_blank"
+        novalidate
+      >
+        <label for="customer">Ваше имя:</label>
+        <input type="text" id="customer" name="customer" value="" required />
+
+        <label for="quantity">Количество подушек:</label>
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          value="1"
+          min="1"
+          max="10"
+        />
+
+        <div>
+          <p>Выберите форму подушки:</p>
+          <label
+            ><input type="radio" name="shape" value="Квадратная" checked />
+            Квадратная</label
+          ><br />
+          <label
+            ><input type="radio" name="shape" value="Круглая" /> Круглая</label
+          ><br />
+          <label
+            ><input type="radio" name="shape" value="Фигурная" />
+            Фигурная</label
+          >
+        </div>
+        <div>
+          <p>Выберите материал подушки:</p>
+          <label
+            ><input type="radio" name="mater" value="Хлопок" checked />
+            Хлопок</label
+          ><br />
+          <label><input type="radio" name="mater" value="Лен" /> Лен</label
+          ><br />
+          <label><input type="radio" name="mater" value="Велюр" /> Велюр</label>
+        </div>
+        <div>
+          <p>Выберите цвет подушки:</p>
+          <label
+            ><input type="radio" name="color" value="Голубая" checked />
+            Голубая</label
+          ><br />
+          <label
+            ><input type="radio" name="color" value="Зеленая" /> Зеленая</label
+          ><br />
+          <label><input type="radio" name="color" value="Белая" /> Белая</label>
+        </div>
+
+        <p>Выберите дополнительные опции:</p>
+        <label
+          ><input
+            type="checkbox"
+            name="option_cover"
+            value="Сменный чехол"
+            checked
+          />
+          Сменный чехол</label
+        ><br />
+        <label
+          ><input type="checkbox" name="option_delivery" value="Доставка" />
+          Доставка</label
+        >
+
+        <label for="date">Дата доставки:</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="password">Код из письма:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value="12345"
+          required
+        />
+
+        <input type="hidden" name="source" value="Online_Pillow_Shop" />
+
+        <button type="submit">Отправить заказ</button>
+      </form>
+    </section>
+
+    <a href="#top" class="to-top">Наверх </a>
+  </body>
+</html>
